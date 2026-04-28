@@ -1,0 +1,79 @@
+@baseUrl = http://localhost:8009
+
+### Health check
+GET {{baseUrl}}/health
+
+###
+
+### Listar gastos (sem filtro)
+GET {{baseUrl}}/gastos
+
+###
+
+### Listar gastos com paginação
+GET {{baseUrl}}/gastos?page=1&page_size=10
+
+###
+
+### Filtrar por órgão
+GET {{baseUrl}}/gastos?orgao=Ministério da Saúde
+
+###
+
+### Filtrar por ano e mês
+GET {{baseUrl}}/gastos?ano=2024&mes=3
+
+###
+
+### Filtrar por categoria
+GET {{baseUrl}}/gastos?categoria=Investimentos
+
+###
+
+### Filtrar por faixa de valor
+GET {{baseUrl}}/gastos?valor_min=1000000&valor_max=10000000
+
+###
+
+### Filtros combinados
+GET {{baseUrl}}/gastos?orgao=Ministério da Saúde&ano=2024&categoria=Pessoal e Encargos Sociais&page_size=5
+
+###
+
+### Erro: valor_min maior que valor_max (422)
+GET {{baseUrl}}/gastos?valor_min=9999999&valor_max=1
+
+###
+
+### Erro: página inexistente
+GET {{baseUrl}}/gastos?page=9999
+
+###
+
+### Detalhe de um gasto — substitua o id por um real
+GET {{baseUrl}}/gastos/00000000-0000-0000-0000-000000000000
+
+###
+
+### Resumo (primeiro acesso → X-Cache: MISS)
+GET {{baseUrl}}/gastos/resumo
+
+###
+
+### Resumo com filtro de ano (segundo acesso → X-Cache: HIT)
+GET {{baseUrl}}/gastos/resumo?ano=2024
+
+###
+
+### Resumo filtrado por órgão e período
+GET {{baseUrl}}/gastos/resumo?orgao=Ministério da Educação&ano=2024&mes=6
+
+###
+
+### Listar órgãos
+GET {{baseUrl}}/orgaos
+
+###
+
+### Listar órgãos com paginação
+GET {{baseUrl}}/orgaos?page=1&page_size=5
